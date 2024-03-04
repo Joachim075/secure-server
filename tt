@@ -1,0 +1,46 @@
+const express = require('express');
+const morgan = require('morgan');
+const fs = require('fs');
+
+const app = express();
+const PORT = 4000;
+
+// Middleware to log server requests
+app.use(morgan('dev'));
+
+// Route handler for login page
+app.get('/login', (req, res) => {
+    fs.readFile('./Public/login.html', 'utf8', (err, data) => {
+        if (err) {
+            console.error(err);
+            res.status(500).send('Error reading login.html');
+            return;
+        }
+        res.send(data);
+    });
+});
+
+// Route handler for node-course page (protected by password)
+app.get('/node-course', (req, res) => {
+    // Hardcoded password for demonstration purposes
+    const password = req.query.password;
+    const correctPassword = 'your_hardcoded_password';
+
+    if (password === correctPassword) {
+        fs.readFile('./Public/node-course.html', 'utf8', (err, data) => {
+            if (err) {
+                console.error(err);
+                res.status(500).send('Error reading node-course.html');
+                return;
+            }
+            res.send(data);
+        });
+    } else {
+        res.redirect('/login');
+    }
+});
+
+// Start server
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+});

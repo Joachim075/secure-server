@@ -1,0 +1,17 @@
+{
+  "name": "week1",
+  "version": "1.0.0",
+  "description": "Week one Assignment.",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "author": "Kafuluma Joachim",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.3",
+    "express-session": "^1.18.0",
+    "morgan": "^1.10.0"
+  }
+}
